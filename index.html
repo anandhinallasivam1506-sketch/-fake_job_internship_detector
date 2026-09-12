@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}
+JobShield - Fake Job Detector
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Detect Fake Jobs & Internships
+        </h1>
+
+        <p>
+            Analyze a job or internship advertisement
+            and identify possible scam indicators.
+        </p>
+
+        <div class="hero-badges">
+
+            <span>🔍 Risk Analysis</span>
+
+            <span>🛡️ Scam Detection</span>
+
+            <span>📊 Risk Score</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container">
+
+    <div class="card">
+
+        <h2>
+            Analyze Job / Internship
+        </h2>
+
+        <p class="subtitle">
+            Enter the details of the opportunity below.
+        </p>
+
+        <form action="{{ url_for('analyze') }}"
+              method="POST">
+
+            <label>
+                Company Name
+            </label>
+
+            <input
+                type="text"
+                name="company"
+                placeholder="Example: ABC Technologies"
+            >
+
+
+            <label>
+                Job / Internship Title
+            </label>
+
+            <input
+                type="text"
+                name="job_title"
+                placeholder="Example: Python Developer Intern"
+            >
+
+
+            <label>
+                Job / Internship Description
+            </label>
+
+            <textarea
+                name="description"
+                rows="10"
+                placeholder="Paste the complete job or internship description here..."
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                🔍 Analyze Opportunity
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <div class="icon">
+                💰
+            </div>
+
+            <h3>
+                Payment Requests
+            </h3>
+
+            <p>
+                Detects registration fees,
+                deposits and suspicious payment requests.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="icon">
+                ⚠️
+            </div>
+
+            <h3>
+                Suspicious Claims
+            </h3>
+
+            <p>
+                Identifies unrealistic salary
+                and guaranteed income claims.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="icon">
+                🔐
+            </div>
+
+            <h3>
+                Sensitive Information
+            </h3>
+
+            <p>
+                Detects requests for OTP,
+                banking information and passwords.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="icon">
+                ⏰
+            </div>
+
+            <h3>
+                Pressure Tactics
+            </h3>
+
+            <p>
+                Identifies urgent and
+                limited-time pressure language.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

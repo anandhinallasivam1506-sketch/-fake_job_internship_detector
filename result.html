@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analysis Result - JobShield
+{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="result-header">
+
+        <h1>
+            Analysis Result
+        </h1>
+
+        <p>
+            Here is the risk assessment for this opportunity.
+        </p>
+
+    </div>
+
+
+    <div class="result-card">
+
+        <div class="score-section">
+
+            <div class="score-circle">
+
+                <span>
+                    {{ analysis.score }}
+                </span>
+
+                <small>
+                    / 100
+                </small>
+
+            </div>
+
+            <h2>
+                {{ analysis.status }}
+            </h2>
+
+        </div>
+
+
+        <div class="job-information">
+
+            <div>
+                <strong>Company</strong>
+
+                <p>
+                    {{ analysis.company or "Not Provided" }}
+                </p>
+            </div>
+
+
+            <div>
+                <strong>Position</strong>
+
+                <p>
+                    {{ analysis.job_title or "Not Provided" }}
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="two-column">
+
+
+        <div class="card">
+
+            <h2>
+                🚨 Detected Warning Signs
+            </h2>
+
+            {% if reasons %}
+
+                {% for reason in reasons %}
+
+                <div class="warning">
+
+                    <h3>
+                        {{ reason.category }}
+                    </h3>
+
+                    <p>
+                        {{ reason.keywords }}
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="success-box">
+
+                    <h3>
+                        ✓ No major warning signs detected
+                    </h3>
+
+                    <p>
+                        The advertisement does not contain
+                        many of the suspicious indicators
+                        checked by JobShield.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                🛡️ Safety Recommendations
+            </h2>
+
+            <ul class="recommendations">
+
+                {% for recommendation in recommendations %}
+
+                <li>
+                    {{ recommendation }}
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="card description-card">
+
+        <h2>
+            Original Description
+        </h2>
+
+        <p>
+            {{ analysis.description }}
+        </p>
+
+    </div>
+
+
+    <div class="button-row">
+
+        <a href="{{ url_for('index') }}"
+           class="button">
+
+            Analyze Another
+
+        </a>
+
+        <a href="{{ url_for('history') }}"
+           class="button secondary">
+
+            View History
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

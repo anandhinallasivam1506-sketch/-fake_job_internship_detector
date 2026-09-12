@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analysis History - JobShield
+{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                Analysis History
+            </h1>
+
+            <p>
+                View previously analyzed job and internship opportunities.
+            </p>
+
+        </div>
+
+        {% if analyses %}
+
+        <a href="{{ url_for('clear_history') }}"
+           class="danger-button"
+           onclick="return confirm('Are you sure you want to clear all history?');">
+
+            Clear History
+
+        </a>
+
+        {% endif %}
+
+    </div>
+
+
+    {% if analyses %}
+
+    <div class="history-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Company
+                    </th>
+
+                    <th>
+                        Position
+                    </th>
+
+                    <th>
+                        Risk Score
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for analysis in analyses %}
+
+                <tr>
+
+                    <td>
+                        {{ analysis.company or "Not Provided" }}
+                    </td>
+
+                    <td>
+                        {{ analysis.job_title or "Not Provided" }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ analysis.score }}/100
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        {% if analysis.status == "High Risk" %}
+
+                        <span class="status high">
+                            High Risk
+                        </span>
+
+                        {% elif analysis.status == "Needs Verification" %}
+
+                        <span class="status medium">
+                            Verify
+                        </span>
+
+                        {% else %}
+
+                        <span class="status low">
+                            Likely Safe
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ analysis.created_at }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{{ url_for('result', analysis_id=analysis.id) }}"
+                            class="view-button">
+
+                            View
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <div class="empty-icon">
+            📋
+        </div>
+
+        <h2>
+            No Analysis Yet
+        </h2>
+
+        <p>
+            Analyze your first job or internship advertisement
+            to see the results here.
+        </p>
+
+        <a href="{{ url_for('index') }}"
+           class="button">
+
+            Start Analysis
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard - JobShield
+{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Overview of your job and internship analysis.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📊
+            </div>
+
+            <div>
+
+                <h3>
+                    Total Analyses
+                </h3>
+
+                <strong>
+                    {{ total }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card danger">
+
+            <div class="stat-icon">
+                🚨
+            </div>
+
+            <div>
+
+                <h3>
+                    High Risk
+                </h3>
+
+                <strong>
+                    {{ high_risk }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card warning-card">
+
+            <div class="stat-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h3>
+                    Needs Verification
+                </h3>
+
+                <strong>
+                    {{ verify }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card safe-card">
+
+            <div class="stat-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <h3>
+                    Likely Safe
+                </h3>
+
+                <strong>
+                    {{ safe }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card dashboard-info">
+
+        <h2>
+            About JobShield
+        </h2>
+
+        <p>
+            JobShield is a web-based fake job and internship
+            detection system designed to identify suspicious
+            patterns in job advertisements.
+        </p>
+
+        <p>
+            The system analyzes text for warning signs such as
+            payment requests, unrealistic income promises,
+            pressure tactics, requests for sensitive information
+            and missing job details.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
